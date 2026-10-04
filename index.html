@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#10110f" />
+  <meta name="description" content="A searchable library of questions, answers, and code snippets." />
+  <title>Stillroom — Questions &amp; Answers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/visitor.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <main class="app-shell">
+    <section id="lock-screen" class="lock-screen hidden" aria-labelledby="lock-title">
+      <div class="lock-card">
+        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="eyebrow">OWNER ACCESS</p>
+        <h1 id="lock-title">Your library,<br><em>your rules.</em></h1>
+        <p id="lock-copy" class="lock-copy">Sign in to add and manage answers.</p>
+        <form id="unlock-form" class="unlock-form">
+            <label for="password-input" class="sr-only">Owner password</label>
+            <div class="password-wrap"><input id="password-input" type="password" autocomplete="current-password" placeholder="Owner password" required minlength="1"><button id="toggle-password" class="icon-button reveal-button" type="button" aria-label="Show password">◉</button></div>
+          <button id="unlock-button" class="button button-primary unlock-button" type="submit"><span>Open owner desk</span><span aria-hidden="true">↗</span></button>
+          <p id="lock-error" class="form-message" role="status"></p>
+        </form>
+        <button id="back-to-library" class="text-button back-library" type="button">← Back to visitor library</button>
+        <p class="privacy-note"><span class="privacy-dot"></span>Owner access is protected</p>
+      </div>
+      <div class="lock-footer"><span>STILLROOM / OWNER ACCESS</span><span>MANAGE PUBLISHED ANSWERS</span></div>
+    </section>
+
+    <section id="vault" class="vault hidden" aria-label="Question and answer vault">
+      <header class="topbar">
+        <a href="#library" class="brand" aria-label="Stillroom home"><span class="brand-mark small" aria-hidden="true"><span></span><span></span><span></span></span><span>stillroom</span></a>
+        <nav class="main-nav" aria-label="Main navigation"><button class="nav-link active" data-view="library" type="button"><span class="nav-index">01</span> Library</button><button class="nav-link" data-view="owner" type="button"><span class="nav-index">02</span> Owner desk</button></nav>
+        <div class="top-actions"><span class="secure-label"><i></i> PUBLIC LIBRARY</span><button id="lock-now" class="icon-button lock-action hidden" type="button" title="Sign out of owner desk" aria-label="Sign out of owner desk">↗</button></div>
+      </header>
+
+      <section id="library-view" class="view library-view">
+        <div class="hero-row"><div class="hero-copy"><p class="eyebrow"><span class="tiny-star">✳</span> SEARCHABLE ANSWERS</p><h1>Find it.<br><em>Use it.</em></h1><p class="hero-subtitle">Search a few words. Read and copy the exact answer.</p></div><div class="hero-orbit" aria-hidden="true"><div class="orbit-ring ring-one"></div><div class="orbit-ring ring-two"></div><div class="orbit-core">S<span>✳</span></div><span class="orbit-label label-a">SEARCH</span><span class="orbit-label label-b">COPY</span></div></div>
+        <div class="search-panel"><label class="search-box" for="search-input"><span class="search-icon" aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Search questions, words, or ideas…" autocomplete="off"><kbd>↵</kbd><button id="clear-search" class="clear-search hidden" type="button" aria-label="Clear search">×</button></label><div class="search-foot"><span id="result-count">Your library is ready</span><span class="search-tip"><i>✳</i> Try a few matching words</span></div></div>
+        <div class="results-heading"><div><p class="eyebrow">THE COLLECTION</p><h2 id="collection-title">Saved answers <span id="question-count" class="count-pill">0</span></h2></div><button id="add-first" class="text-button hidden" type="button">Add your first question <span>↗</span></button></div>
+        <div id="empty-state" class="empty-state"><div class="empty-symbol">✳</div><h3>No questions have been published yet.</h3><p>The owner can add the first question and answer from the Owner desk.</p><button class="button button-secondary" data-go-owner type="button">Owner sign in <span>↗</span></button></div>
+        <div id="results-grid" class="results-grid" aria-live="polite"></div><div id="no-results" class="no-results hidden"><span>⌕</span><h3>No close matches yet.</h3><p>Try a shorter phrase or a different keyword.</p></div>
+        <footer class="page-footer"><span>THOUGHTFULLY KEPT. EASILY FOUND.</span><span>STILLROOM <b>✳</b></span></footer>
+      </section>
+
+      <section id="owner-view" class="view owner-view hidden">
+        <div class="owner-heading"><div><p class="eyebrow"><span class="tiny-star">✳</span> OWNER WORKSPACE</p><h1>Owner <em>desk.</em></h1><p class="hero-subtitle">Publish answers for visitors to search, read, and copy.</p></div><div class="owner-seal" aria-hidden="true"><span>OWNER</span><b>✳</b><span>EDIT &amp; PUBLISH</span></div></div>
+        <div class="owner-layout"><div class="owner-main">
+          <section class="panel editor-panel"><div class="panel-heading"><div class="panel-icon">＋</div><div><p class="eyebrow">ADD TO YOUR LIBRARY</p><h2 id="editor-title">New question</h2></div><span id="edit-badge" class="edit-badge hidden">EDITING</span></div>
+            <form id="entry-form" class="entry-form"><input id="entry-id" type="hidden"><label class="field-label" for="question-field">QUESTION <span>What do you want visitors to find?</span></label><textarea id="question-field" rows="3" placeholder="Write the question in your own words…" required maxlength="500"></textarea><label class="field-label answer-label" for="answer-field">ANSWER <span>Code indentation and line breaks are preserved.</span></label><textarea id="answer-field" rows="7" placeholder="Write or paste the answer here…" required maxlength="50000" spellcheck="false"></textarea><div class="form-bottom"><span id="save-status" class="save-status"><i></i> Publishes to shared library</span><div class="form-buttons"><button id="cancel-edit" class="button button-quiet hidden" type="button">Cancel</button><button id="save-entry" class="button button-primary" type="submit">Publish answer <span>↗</span></button></div></div></form>
+          </section>
+          <section class="panel import-panel"><div class="panel-heading compact"><div class="panel-icon import-icon">⇧</div><div><p class="eyebrow">BRING YOUR ANSWERS IN</p><h2>Import a collection</h2></div></div><p class="panel-copy">Publish questions from CSV, JSON, or text. Visitors can read all published answers.</p><label class="drop-zone" id="drop-zone" for="import-file"><span class="upload-art" aria-hidden="true">↑</span><span><strong>Choose a file</strong> or drag it here</span><small>CSV · JSON · TXT</small><input id="import-file" type="file" accept=".csv,.json,.txt,text/csv,application/json,text/plain"></label><p id="import-message" class="form-message" role="status"></p><details class="format-help"><summary>See file format examples</summary><pre>CSV: question,answer
+JSON: [{"question":"…","answer":"…"}]
+TXT: Question: Your question
+Answer:
+  code keeps its spaces and lines
+---
+Question: Next question
+Answer:
+  next answer</pre></details></section>
+        </div><aside class="owner-side">
+          <section class="panel collection-panel"><div class="panel-heading compact"><div class="panel-icon stack-icon">▤</div><div><p class="eyebrow">PUBLISHED COLLECTION</p><h2 id="owner-total">0 answers</h2></div></div><p class="panel-copy">These questions are shared with every visitor.</p><div class="collection-meter"><span id="meter-fill"></span></div><div class="collection-meta"><span>ON THIS SITE</span><span id="storage-size">0 KB</span></div><button id="export-backup" class="button button-secondary full-button" type="button">Download JSON copy <span>↓</span></button><label class="button button-quiet full-button restore-button">Import JSON <span>↑</span><input id="restore-backup" type="file" accept=".json,application/json"></label></section>
+          <section class="note-card"><div class="note-star">✳</div><p class="eyebrow">FORMAT PRESERVED</p><p class="note-quote">Spaces, line breaks, and code indentation stay intact when answers are copied.</p><span class="note-caption">READY TO PASTE</span></section>
+          <section class="panel password-panel"><div class="panel-heading compact"><div class="panel-icon">⌑</div><div><p class="eyebrow">OWNER SECURITY</p><h2>Change owner password</h2></div></div><form id="password-change-form"><label class="field-label" for="new-owner-password">NEW PASSWORD <span>Changes are saved to the site immediately.</span></label><input id="new-owner-password" type="password" required minlength="1" maxlength="256" autocomplete="new-password"><button class="button button-primary full-button" type="submit">Save new password <span>↗</span></button><p id="password-change-message" class="form-message" role="status"></p></form></section>
+          <section class="security-card"><span class="security-icon">⌑</span><div><strong>Owner-only editing</strong><p>Visitors can read the published questions. Only the owner can change them.</p></div></section>
+        </aside></div>
+        <div class="owner-list-heading"><div><p class="eyebrow">MANAGE YOUR ANSWERS</p><h2>In your library <span id="owner-list-count" class="count-pill">0</span></h2></div><button class="text-button" data-go-library type="button">View library <span>↗</span></button></div>
+        <div id="owner-list" class="owner-list"></div><footer class="page-footer"><span>ONLY YOU CAN ADD OR CHANGE YOUR ANSWERS.</span><span>STILLROOM <b>✳</b></span></footer>
+      </section>
+    </section>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
